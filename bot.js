@@ -13,12 +13,18 @@ const client = new Client({
 });
 const numbers = [
     ':one:', ':two:', ':three:', ':four:', ':five:', ':six:', ':seven:', ':eight:', ':nine:',
-    ':one::zero:', ':one::one:', ':one::two:', ':one::three:', ':one::four:', ':one::five:', 
+    ':one::zero:', ':one::one:', ':one::two:', ':one::three:', ':one::four:', ':one::five:',
     ':one::six:', ':one::seven:', ':one::eight:', ':one::nine:', ':two::zero:'
-  ];
+];
 
 client.on("ready", () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    try {
+        client.user.setPresence({ activities: [{ name: 'on a ukulele' }], status: 'available' });
+        console.log(`Bot's Status: successfully updated`)
+    } catch (error) {
+        console.error("Bot's Status: error while updating status")
+    }
 });
 
 client.on("messageCreate", message => {
@@ -34,7 +40,7 @@ client.on("messageCreate", message => {
             message.channel.send(":boom:")
         }
         else if (message.content.includes('1d20')) {
-            let number  = getRandomInt(1,20);
+            let number = getRandomInt(1, 20);
             message.channel.send(`${convertToWords(number)}`);
         } else {
             message.channel.send(randomCapitalize(message.content));
@@ -64,11 +70,11 @@ function getRandomInt(min, max) {
 function convertToWords(number) {
     console.info(`Rolled ${number}`)
     if (number >= 1 && number <= 20) {
-      return numbers[number-1];
+        return numbers[number - 1];
     } else {
-      return 'Number out of range';
+        return 'Number out of range';
     }
-  }
+}
 
 
 client.login(token);
