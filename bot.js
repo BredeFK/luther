@@ -22,7 +22,7 @@ client.on("ready", () => {
 });
 
 client.on("messageCreate", message => {
-    if (message.author.displayName !== 'Luther' && message.content.startsWith('!')) {
+    if (message.author.displayName !== 'Uther' && message.content.startsWith('!')) {
         console.info(`Message from ${message.author.displayName}: ${message.content}`)
         if (message.content.includes('monday') || message.content.includes('mandag')) {
             message.channel.send("https://www.fritjof.no/images/mandag.gif")
